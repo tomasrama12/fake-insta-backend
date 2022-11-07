@@ -20,8 +20,6 @@ const getAllPosts = async () => {
     try {
         const postSchema1 = postSchema(newPost);
   
-        console.log('estoy acaa ' + newPost);
-  
         await postSchema1.save().then((data) => console.log(data)).catch((error) => console.log('hubo error ' + error));
   
         return newPost;
@@ -32,4 +30,14 @@ const getAllPosts = async () => {
     
   };
 
-  module.exports = {getAllPosts, createNewPost};
+  const getPostById = async (id) => {
+    try {
+        const dataToReturn = await postSchema.findOne({'id':id});
+        console.log(dataToReturn);
+        return dataToReturn;
+    } catch (error) {
+        console.log('error');
+    }
+  }
+
+  module.exports = {getAllPosts, createNewPost, getPostById};

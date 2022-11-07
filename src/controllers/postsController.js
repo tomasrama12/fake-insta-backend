@@ -37,4 +37,24 @@ const getAllPosts = async (req, res) => {
     
   }
 
-module.exports = {getAllPosts, createNewPost};
+
+  const getPostById = async (req, res) => {
+    const postId = req.params['postId'];
+    if(!postId){
+        return;
+    }
+
+    try {
+        const returnedPost = await postsService.getPostById(postId);
+        if(returnedPost == null){
+            res.status(404).send({status:"FAILED", error:"Post not found"});
+        }else{
+            res.send(returnedPost)
+        }
+    } catch (error) {
+        console.log(eror);
+    }
+    
+}
+
+module.exports = {getAllPosts, createNewPost, getPostById};

@@ -23,4 +23,14 @@ const getAllPosts = async () => {
     
   };
 
-module.exports = {getAllPosts, createNewPost};
+  const getPostById = async (id) =>{
+    try {
+        const post = await Post.getPostById(id);
+        return post;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+module.exports = {getAllPosts, createNewPost, getPostById};
